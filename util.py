@@ -32,7 +32,7 @@ def google_transit_time(start, end, time):
         .format(start[0], start[1], end[0], end[1])
     result= simplejson.load(urllib.request.urlopen(url))
     driving_time = result['rows'][0]['elements'][0]['duration']['value']
-    return driving_time
+    return driving_time / 60.0
 
 def in_box(coords, box):
     """

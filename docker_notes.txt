@@ -1,0 +1,3 @@
+ docker build -t apartment-finder .
+
+ docker run -d -e SLACK_TOKEN="" -v /home/ubuntu/apartment-finder/config:/opt/wwc/apartment-finder/config apartment-finder
