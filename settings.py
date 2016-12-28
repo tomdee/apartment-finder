@@ -46,6 +46,12 @@ MAX_TRANSIT_DIST = 2 # kilometers
 TRANSIT_STATIONS = {
 }
 
+## The location
+WORK_LOCATION = [33.9205867, -118.3271398]
+
+TIME_TO_WORK = "8:30"
+TIME_FROM_WORK = "19:00"
+
 ## Search type preferences
 
 # The Craigslist section underneath housing that you want to search in.
@@ -59,7 +65,7 @@ CRAIGSLIST_HOUSING_SECTION = 'apa'
 # How long we should sleep between scrapes of Craigslist.
 # Too fast may get rate limited.
 # Too slow may miss listings.
-SLEEP_INTERVAL = 20 * 60 # 20 minutes
+SLEEP_INTERVAL = 10 * 60 # 10 minutes
 
 # Which slack channel to post the listings into.
 SLACK_CHANNEL = "#housing"

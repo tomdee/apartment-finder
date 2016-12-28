@@ -1,5 +1,7 @@
 import settings
 import math
+import simplejson
+import urllib
 
 def coord_distance(lat1, lon1, lat2, lon2):
     """
@@ -18,6 +20,20 @@ def coord_distance(lat1, lon1, lat2, lon2):
     km = 6367 * c
     return km
 
+def google_transit_time(start, end, time):
+    """
+    Get the time to travel between start and stop
+    :param start: List of lat and log for starting position
+    :param end: List of lat and log for Ending position
+    :param time:
+    :return:
+    """
+    url = "http://maps.googleapis.com/maps/api/distancematrix/json?origins={},{}&destinations={},{}&mode=driving&language=en-EN&sensor=false"\
+        .format(start[0], start[1], end[0], end[1])
+    result= simplejson.load(urllib.request.urlopen(url))
+    driving_time = result['rows'][0]['elements'][0]['duration']['value']
+    return driving_time
+
 def in_box(coords, box):
     """
     Find if a coordinate tuple is inside a bounding box.
@@ -35,10 +51,11 @@ def post_listing_to_slack(sc, listing):
     :param sc: A slack client.
     :param listing: A record of the listing.
     """
-    desc = "{0} | {1} | {2} | {3} | <{4}>".format(listing["area"], listing["price"], listing["bart_dist"], listing["name"], listing["url"])
+    desc = "{} | {} | {}m | {} | <{}>".format(listing["area"], listing["price"], listing["driving_time"],
+                                              listing["name"], listing["url"])
     sc.api_call(
         "chat.postMessage", channel=settings.SLACK_CHANNEL, text=desc,
-        username='pybot', icon_emoji=':robot_face:'
+        username='apartment-finder', icon_emoji=':robot_face:'
     )
 
 def find_points_of_interest(geotag, location):
@@ -78,10 +95,14 @@ def find_points_of_interest(geotag, location):
             if hood in location.lower():
                 area = hood
 
+    # Try and find travel time to work
+    driving_time = google_transit_time(geotag, settings.WORK_LOCATION, settings.TIME_TO_WORK)
+
     return {
         "area_found": area_found,
         "area": area,
         "near_bart": near_bart,
         "bart_dist": bart_dist,
-        "bart": bart
+        "bart": bart,
+        "driving_time": driving_time
     }

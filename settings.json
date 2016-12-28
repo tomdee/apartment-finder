@@ -1,0 +1,8 @@
+{
+  "parking":[
+    'carport',
+    'attached garage',
+    'detached garage',
+    'off-street parking',
+    'street parking', 'valet parking']
+}
