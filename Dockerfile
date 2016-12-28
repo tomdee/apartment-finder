@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:trusty
 
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
