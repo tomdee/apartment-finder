@@ -64,9 +64,9 @@ def post_listing_to_slack(sc, listing):
     :param sc: A slack client.
     :param listing: A record of the listing.
     """
-    desc = "{} - {:.2f} - {}\\n{}\\n{}\\n<{}>".format(listing["area"], listing["price"],
-                                                      listing["walkscore"], listing["driving_time"],
-                                                      listing["name"], listing["url"])
+    desc = "{} - {} - {}\\nTime to work: {:.2f}\\n{}\\n<{}>".format(listing["area"], listing["price"],
+                                                                    listing["walkscore"], listing["driving_time"],
+                                                                    listing["name"], listing["url"])
     sc.api_call(
         "chat.postMessage", channel=settings.SLACK_CHANNEL, text=desc,
         username='Apartment Finder', icon_emoji=':robot_face:'
