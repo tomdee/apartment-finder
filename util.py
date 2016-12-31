@@ -26,13 +26,26 @@ def google_transit_time(start, end, time):
     :param start: List of lat and log for starting position
     :param end: List of lat and log for Ending position
     :param time:
-    :return:
+    :return: transit time in minutes
     """
     url = "http://maps.googleapis.com/maps/api/distancematrix/json?origins={},{}&destinations={},{}&mode=driving&language=en-EN&sensor=false"\
         .format(start[0], start[1], end[0], end[1])
     result= simplejson.load(urllib.request.urlopen(url))
     driving_time = result['rows'][0]['elements'][0]['duration']['value']
     return driving_time / 60.0
+
+def get_walkscore(lat, lon):
+    url = "http://api.walkscore.com/score?format=json&lat={}&lon={}&wsapikey={}" \
+        .format(lat, lon, settings.WS_API_KEY)
+
+    result = simplejson.load(urllib.request.urlopen(url))
+
+    try:
+        score = result["walkscore"]
+    except KeyError:
+        score = 0
+
+    return score
 
 def in_box(coords, box):
     """
@@ -51,11 +64,12 @@ def post_listing_to_slack(sc, listing):
     :param sc: A slack client.
     :param listing: A record of the listing.
     """
-    desc = "{} | {} | {}m | {} | <{}>".format(listing["area"], listing["price"], listing["driving_time"],
-                                              listing["name"], listing["url"])
+    desc = "{} - {:.2f} - {}\\n{}\\n{}\\n<{}>".format(listing["area"], listing["price"],
+                                                      listing["walkscore"], listing["driving_time"],
+                                                      listing["name"], listing["url"])
     sc.api_call(
         "chat.postMessage", channel=settings.SLACK_CHANNEL, text=desc,
-        username='apartment-finder', icon_emoji=':robot_face:'
+        username='Apartment Finder', icon_emoji=':robot_face:'
     )
 
 def find_points_of_interest(geotag, location):
@@ -98,11 +112,15 @@ def find_points_of_interest(geotag, location):
     # Try and find travel time to work
     driving_time = google_transit_time(geotag, settings.WORK_LOCATION, settings.TIME_TO_WORK)
 
+    # Try and get walkscore
+    walkscore = get_walkscore(geotag[0], geotag[1])
+
     return {
         "area_found": area_found,
         "area": area,
         "near_bart": near_bart,
         "bart_dist": bart_dist,
         "bart": bart,
-        "driving_time": driving_time
+        "driving_time": driving_time,
+        "walkscore": walkscore
     }

@@ -1,5 +1,5 @@
  docker build -t apartment-finder .
 
- docker run -d -e SLACK_TOKEN="" -v /home/ubuntu/apartment-finder/config:/opt/wwc/apartment-finder/config apartment-finder
+ docker run -d -v /home/ubuntu/apartment-finder/config:/opt/wwc/apartment-finder/config apartment-finder
 
  docker exec -it furious_mahavira tail -f -n 1000 /opt/wwc/logs/afinder.log

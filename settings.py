@@ -74,6 +74,10 @@ SLACK_CHANNEL = "#housing"
 # Should be put in private.py, or set as an environment variable.
 SLACK_TOKEN = os.getenv('SLACK_TOKEN', "")
 
+# The token that allows us to connect to walkscore.
+# Should be put in private.py, or set as an environment variable.
+WS_API_KEY = os.getenv('WS_API_KEY', "")
+
 # Any private settings are imported here.
 try:
     from private import *

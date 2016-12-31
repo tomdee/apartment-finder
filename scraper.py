@@ -32,7 +32,8 @@ class Listing(Base):
     cl_id = Column(Integer, unique=True)
     area = Column(String)
     bart_stop = Column(String)
-    driving_time = Column(String)
+    driving_time = Column(Float)
+    walkscore = Column(Float)
 
 Base.metadata.create_all(engine)
 
@@ -78,7 +79,8 @@ def scrape_area(area):
             else:
                 result["area"] = ""
                 result["bart"] = ""
-                result["driving_time"] = ""
+                result["driving_time"] = 0
+                result["walkscore"] = 0
 
             # Try parsing the price.
             price = 0
@@ -98,7 +100,8 @@ def scrape_area(area):
                 location=result["where"],
                 cl_id=result["id"],
                 area=result["area"],
-                driving_time = result["driving_time"]
+                driving_time = result["driving_time"],
+                walkscore = result["walkscore"]
             )
 
             # Save the listing so we don't grab it again.
