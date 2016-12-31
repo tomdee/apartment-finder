@@ -31,7 +31,14 @@ def google_transit_time(start, end, time):
     url = "http://maps.googleapis.com/maps/api/distancematrix/json?origins={},{}&destinations={},{}&mode=driving&language=en-EN&sensor=false"\
         .format(start[0], start[1], end[0], end[1])
     result= simplejson.load(urllib.request.urlopen(url))
-    driving_time = result['rows'][0]['elements'][0]['duration']['value']
+
+    try:
+        driving_time = result['rows'][0]['elements'][0]['duration']['value']
+    except KeyError:
+        driving_time = 0
+    except IndexError:
+        driving_time = 0
+
     return driving_time / 60.0
 
 def get_walkscore(lat, lon):
@@ -43,6 +50,8 @@ def get_walkscore(lat, lon):
     try:
         score = result["walkscore"]
     except KeyError:
+        score = 0
+    except IndexError:
         score = 0
 
     return score
