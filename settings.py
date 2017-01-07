@@ -104,7 +104,7 @@ BOXES = {
 # but it also catches listings that don't have coordinates (many listings are missing this info).
 NEIGHBORHOODS = ["marina del rey", "venice", "santa monica", "culver city", "mar vista", "playa vista",
                  "inglewood", "el segundo", "gardena", "hawthorne", "manhattan",
-                 "manhattan beach", "hermosa", "hermosa beach", "torrance", "long beach", "signal hill"]
+                 "manhattan beach", "hermosa", "hermosa beach", "torrance"]
 
 ## Transit preferences
 
