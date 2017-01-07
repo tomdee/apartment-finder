@@ -52,14 +52,14 @@ BOXES = {
         [33.927978, -118.405876],
         [34.003293, -118.278637]
     ],
-    "DTLA": [
-        [34.00742, -118.282585],
-        [34.081633, -118.210521]
-    ],
-    "Hollywood": [
-        [34.029918, -118.470538],
-        [34.104112, -118.275032]
-    ],
+    # "DTLA": [
+    #    [34.00742, -118.282585],
+    #    [34.081633, -118.210521]
+    # ],
+    # "Hollywood": [
+    #     [34.029918, -118.470538],
+    #     [34.104112, -118.275032]
+    # ],
     "El Segundo": [
         [33.900199, -118.442526],
         [33.934735, -118.368931]
@@ -92,10 +92,10 @@ BOXES = {
         [33.786885, -118.29679],
         [33.871122, -118.202307]
     ],
-    "Long Beach": [
-        [33.730575, -118.2148],
-        [33.873782, -118.118869]
-    ]
+    # "Long Beach": [
+    #     [33.730575, -118.2148],
+    #     [33.873782, -118.118869]
+    # ]
 }
 
 # A list of neighborhood names to look for in the Craigslist neighborhood name field. If a listing doesn't fall into
@@ -103,7 +103,7 @@ BOXES = {
 # of these.  This is less accurate than the boxes, because it relies on the owner to set the right neighborhood,
 # but it also catches listings that don't have coordinates (many listings are missing this info).
 NEIGHBORHOODS = ["marina del rey", "venice", "santa monica", "culver city", "mar vista", "playa vista",
-                 "inglewood", "downtown", "el segundo", "gardena", "hawthorne", "manhattan",
+                 "inglewood", "el segundo", "gardena", "hawthorne", "manhattan",
                  "manhattan beach", "hermosa", "hermosa beach", "torrance", "long beach", "signal hill"]
 
 ## Transit preferences
