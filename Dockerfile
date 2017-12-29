@@ -1,24 +1,30 @@
 FROM ubuntu:xenial
 
+RUN apt-get clean && apt-get update && apt-get install -y locales
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-RUN apt-get update && \
-    apt-get -y install \
-              python3 \
-              python3-pip \
-              make \
-              build-essential \
+RUN    apt-get -y install \
+              python3 
+RUN    apt-get -y install \
+              build-essential
+RUN    apt-get -y install \
+              make 
+RUN    apt-get -y install \
+              python3-pip 
+RUN    apt-get -y install \
               libssl-dev \
               zlib1g-dev \
-              libbz2-dev \
+              libbz2-dev
+RUN    apt-get -y install \
               libreadline-dev \
               libsqlite3-dev \
               wget \
               curl \
-              llvm \
+              llvm 
+RUN    apt-get -y install \
               libncurses5-dev \
               zip \
               git-core \
