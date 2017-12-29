@@ -114,8 +114,12 @@ MAX_TRANSIT_DIST = 2 # kilometers
 # Transit stations you want to check against.  Every coordinate here will be checked against each listing,
 # and the closest station name will be added to the result and posted into Slack.
 TRANSIT_STATIONS = {
+    "oakland_19th_bart": [37.808364,-122.268633],
+    "macarthur_bart": [37.829083,-122.267040],
+    "rockridge_bart": [37.844700,-122.251397],
+    "downtown_berkeley_bart": [37.870089,-122.268132],
+    "north_berkeley_bart": [37.873954,-122.283420]
 }
-
 ## The location
 WORK_LOCATION = [33.9205867, -118.3271398]
 
